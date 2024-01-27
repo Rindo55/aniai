@@ -62,7 +62,7 @@ async def handle_message(client, message):
                 text=response.text,
                 reply_to_message_id=topic_id
             )
-     elif topz == 20 and message.caption:
+    elif topz == 20 and message.caption:
         topic_id=topz
         model_name = "gemini-pro-vision"
         sticker_id = random.choice(stickers)
