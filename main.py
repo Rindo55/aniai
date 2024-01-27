@@ -26,7 +26,7 @@ bot_token = "5787191452:AAGPcjesbDih65vqH5rUFbrxZ96yHemISi4"
 app = Client("anime_bot", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
 GOOGLE_API_KEY = "AIzaSyA5X_AHEvif0EyIP8_Kx4jCg7lVEsArctQ"
 genai.configure(api_key=GOOGLE_API_KEY)
-@app.on_message(filters.chat(-1001911678094))
+@app.on_message(filters.chat(-1001944303479))
 async def handle_message(client, message):
     user = message.from_user
     userid = user.id
