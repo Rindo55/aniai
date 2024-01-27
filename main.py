@@ -32,36 +32,39 @@ async def handle_message(client, message):
     userid = user.id
     topz = message.reply_to_message_id
     KAYO_ID=-1001944303479
-    if topz == 20 and message.text.startswith("/"):
-        pass
-    elif topz == 20 and message.text:
-        topic_id=topz
-        sticker_id = random.choice(stickers)
-        sticker = await app.send_sticker(
+    
+    if topz == 20 and message.text:
+        tezt = message.text
+        if tezt.startswith("/"):
+            pass
+        else:
+            topic_id=topz
+            sticker_id = random.choice(stickers)
+            sticker = await app.send_sticker(
                 chat_id=KAYO_ID,
                 sticker=sticker_id,
                 reply_to_message_id=topic_id
             )
-        txt = await app.send_message(
-            chat_id=KAYO_ID,
-            text=f"Loading gemini-pro ...",
-            reply_to_message_id=topic_id
-        )
-        model = genai.GenerativeModel('gemini-pro')
-        await txt.edit("⚡ Thinking....")
-        text = message.text
-        await txt.edit("Shhh! 🤫, Thinking!\nPlease Wait..\nDon't send any other query in the meantime\n\n#BETA")
-        response = model.generate_content(text)
-        await txt.edit('Formating the Result...')
-        await sticker.delete()
-        await txt.delete()
-        if response.text:
-            print("response: ", response.text)
-            await app.send_message(
+            txt = await app.send_message(
                 chat_id=KAYO_ID,
-                text=response.text,
+                text=f"Loading gemini-pro ...",
                 reply_to_message_id=topic_id
             )
+            model = genai.GenerativeModel('gemini-pro')
+            await txt.edit("⚡ Thinking....")
+            text = message.text
+            await txt.edit("Shhh! 🤫, Thinking!\nPlease Wait..\nDon't send any other query in the meantime\n\n#BETA")
+            response = model.generate_content(text)
+            await txt.edit('Formating the Result...')
+            await sticker.delete()
+            await txt.delete()
+            if response.text:
+                print("response: ", response.text)
+                await app.send_message(
+                    chat_id=KAYO_ID,
+                    text=response.text,
+                    reply_to_message_id=topic_id
+                )
     elif topz == 20 and message.caption:
         topic_id=topz
         model_name = "gemini-pro-vision"
